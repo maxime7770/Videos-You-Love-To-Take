@@ -130,10 +130,3 @@ if predictions is not None:
     # histogram with prediction for each category
     st.bar_chart(data = pd.DataFrame(dict, columns=["Category", "Prediction"]), x="Category", y="Prediction (%)")
 
-
-
-
-
-
-if __name__ == "__main__":
-    predictions = predict(video_file)
