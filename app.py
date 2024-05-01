@@ -19,7 +19,7 @@ loaded_model = load_model("models/new_model.h5")
 
 CAP_PROP_POS_MSEC = 0
 
-def frame_iterator(filename, every_ms=1000, max_num_frames=300):
+def frame_iterator(filename, every_ms=1000, max_num_frames=10):
     video_capture = cv2.VideoCapture()
     if not video_capture.open(filename):
         return
@@ -89,6 +89,10 @@ def predict(video_file):
 
 st.title("What videos do you love to take? 🎥 - Maxime Wolf")
 
+st.info("How does it work? Check the GitHub repository [here](https://github.com/maxime7770/Videos-You-Love-To-Take/blob/main/readme.md)")
+
+st.warning("The app might crash due to Streamlit's memory limitations!")
+
 st.write("Upload a video file to get predictions")
 
 uploaded_file = st.file_uploader("Choose a video...", type=["mp4"])
@@ -121,7 +125,6 @@ if predictions is not None:
     dict = zip(categories, predictions[0] * 100)
     # histogram with prediction for each category
     st.bar_chart(data = pd.DataFrame(dict, columns=["Category", "Prediction"]), x="Category", y="Prediction (%)")
-
 
 
 
