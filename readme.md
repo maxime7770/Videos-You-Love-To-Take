@@ -52,14 +52,31 @@ Given that 29% of the dataset is categorized under the label “Vehicle” (the 
 ### Simple RNN model:
 We created a model with 2 simple RNN layers with 64 nodes in each layer to predict the label. The model performed slightly better than the baseline at around 35.2% validation accuracy. The initial Simple RNN model's low accuracy can be attributed to several factors. Firstly, Simple RNNs may struggle with capturing long-term dependencies in sequential data, limiting their ability to effectively learn complex patterns. Additionally, with only two layers of 64 nodes each, the model may lack the capacity to sufficiently represent the intricate relationships present in the data. Furthermore, the absence of regularization techniques such as dropout may lead to overfitting, causing the model to generalize poorly to unseen data, as we can see the drop in the model’s performance from training to validation.
 
+<img width="1145" alt="Screenshot 2024-03-29 at 11 01 43 AM" src="https://github.com/maxime7770/Videos-You-Love-To-Take/assets/58089609/4f820a1d-9a4e-4e99-944e-eb2dbb5b1e38">
+
+Figure 1. NN architecture using a simple RNN model
+
+
 ### RNN and LSTM model
 We also built an architecture using both RNN and LSTM layers. The full architecture is shown below. We leverage both spatial features and temporal features by using CNN blocks and LSTM layers in parallel. We then concatenate the embeddings into a single vector that is passed into several dense layers.
 
-Figure 1. NN architecture using both RNN and LSTM layers
+<img width="584" alt="Screenshot 2024-03-29 at 11 02 26 AM" src="https://github.com/maxime7770/Videos-You-Love-To-Take/assets/58089609/d34d467d-0d76-4ab0-8bbc-16427aadb736">
+
+Figure 2. NN architecture using both RNN and LSTM layers
 
 The model’s performance was significantly better when combining CNN and LSTM layers, which are capable of capturing long-term dependencies in sequential data. Additionally, the increased complexity of the model architecture, particularly with the inclusion of multiple LSTM layers and additional dense layers, provides the model with a higher capacity to learn and represent complex patterns present in the data. Moreover, the model demonstrated high validation accuracy, indicating the effectiveness of dropout regularization in preventing overfitting.
 
 ## Results
+
+| Model                 | Training Accuracy | Validation Accuracy |
+|-----------------------|-------------------|---------------------|
+| Baseline              | 29.0%             | -                   |
+| Simple RNN model      | 45.3%             | 35.2%               |
+| CNN and LSTM model    | 88.4%             | 87.9%               |
+
+The CNN and LSTM model demonstrates a 200% improvement from the Baseline model, showcasing the efficacy of combining convolutional and recurrent neural networks in this context.
+
+
 
 
 
