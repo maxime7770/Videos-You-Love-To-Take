@@ -19,7 +19,7 @@ loaded_model = load_model("models/new_model.h5")
 
 CAP_PROP_POS_MSEC = 0
 
-def frame_iterator(filename, every_ms=1000, max_num_frames=10):
+def frame_iterator(filename, every_ms=1000, max_num_frames=50):
     video_capture = cv2.VideoCapture()
     if not video_capture.open(filename):
         return
@@ -53,13 +53,11 @@ def quantize(features, min_quantized_value=-2.0, max_quantized_value=2.0):
   return features
 
 
-video_file = "./data/Test_Video/Music.mp4"  # A test sample.
-
-def predict(video_file):
+def predict(video_file, num_frames=45):
     rgb_features = []
     sum_rgb_features = None
 
-    fiter = frame_iterator(video_file, every_ms=1000.0)
+    fiter = frame_iterator(video_file, every_ms=1000.0, max_num_frames=num_frames)
 
     max_frames = 45  # Number of frames to extract
 
@@ -91,9 +89,15 @@ st.title("What videos do you love to take? 🎥 - Maxime Wolf")
 
 st.info("How does it work? Check the GitHub repository [here](https://github.com/maxime7770/Videos-You-Love-To-Take/blob/main/readme.md)")
 
-st.warning("The app might crash due to Streamlit's memory limitations!")
+st.warning("The app might crash when Streamlit servers are busy!")
 
 st.write("Upload a video file to get predictions")
+
+
+# choose number of frames to consider (too many frames might crash the app)
+
+num_frames = st.slider("Number of frames to consider", 5, 300, 30)
+
 
 uploaded_file = st.file_uploader("Choose a video...", type=["mp4"])
 predictions = None
@@ -106,13 +110,13 @@ if video_title:
     st.video(f"data/Test_Video/{video_title}")
     video_file = f"data/Test_Video/{video_title}"
     with st.spinner("Predicting..."):
-      predictions = predict(video_file)
+      predictions = predict(video_file, num_frames)
 
 if uploaded_file is not None:
     st.video(uploaded_file)
     video_file = uploaded_file
     with st.spinner("Predicting..."):
-        predictions = predict(video_file)
+        predictions = predict(video_file, num_frames)
 
 
 
