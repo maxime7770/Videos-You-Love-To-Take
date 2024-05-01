@@ -59,7 +59,7 @@ def predict(video_file, num_frames=30):
 
     fiter = frame_iterator(video_file, every_ms=1000.0, max_num_frames=num_frames)
 
-    max_frames = 45  # Number of frames to extract
+    max_frames = num_frames  # Number of frames to extract
 
     for _ in range(max_frames):
         frame = next(fiter, None)
