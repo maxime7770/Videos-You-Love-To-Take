@@ -64,3 +64,4 @@ Werkzeug==3.0.2
 wrapt==1.16.0
 zipp==3.18.1
 pandas
+streamlit==1.33.0
