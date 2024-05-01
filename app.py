@@ -59,7 +59,7 @@ def predict(video_file, num_frames=30):
 
     fiter = frame_iterator(video_file, every_ms=1000.0, max_num_frames=num_frames)
 
-    max_frames = num_frames  # Number of frames to extract
+    max_frames = 45  # Number of frames to extract
 
     for _ in range(max_frames):
         frame = next(fiter, None)
@@ -96,7 +96,7 @@ st.write("Upload a video file to get predictions")
 
 # choose number of frames to consider (too many frames might crash the app)
 
-num_frames = 30 #st.slider("Number of frames to consider", 5, 300, 30)
+num_frames = 45 #st.slider("Number of frames to consider", 5, 300, 30)
 
 
 uploaded_file = st.file_uploader("Choose a video...", type=["mp4"])
@@ -128,5 +128,5 @@ if predictions is not None:
 
     dict = zip(categories, predictions[0] * 100)
     # histogram with prediction for each category
-    st.bar_chart(data = pd.DataFrame(dict, columns=["Category", "Prediction"]), x="Category", y="Prediction (%)")
+    st.bar_chart(data = pd.DataFrame(dict, columns=["Category", "Prediction (%)"]), x="Category", y="Prediction (%)")
 
