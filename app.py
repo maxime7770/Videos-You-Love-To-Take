@@ -102,12 +102,14 @@ video_title = st.selectbox("Choose a video", [""] + video_titles)
 if video_title:
     st.video(f"data/Test_Video/{video_title}")
     video_file = f"data/Test_Video/{video_title}"
-    predictions = predict(video_file)
+    with st.spinner("Predicting..."):
+      predictions = predict(video_file)
 
 if uploaded_file is not None:
     st.video(uploaded_file)
     video_file = uploaded_file
-    predictions = predict(video_file)
+    with st.spinner("Predicting..."):
+        predictions = predict(video_file)
 
 
 
