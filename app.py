@@ -11,7 +11,6 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "1"
 
 
 loaded_model = load_model("models/new_model.h5")
-loaded_model.summary()
 
 # Reference: https://github.com/google/youtube-8m/tree/master/feature_extractor
 # Note that the original module only works for TF 1.x but not 2.0,
@@ -88,7 +87,7 @@ def predict(video_file):
 # the user can also choose a video already in the data folder
 
 
-st.title("Videos You Love! 🎥")
+st.title("What videos do you love to take? 🎥 - Maxime Wolf")
 
 st.write("Upload a video file to get predictions")
 
@@ -131,4 +130,3 @@ if predictions is not None:
 
 if __name__ == "__main__":
     predictions = predict(video_file)
-    print(predictions)
