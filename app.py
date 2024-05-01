@@ -19,7 +19,7 @@ loaded_model = load_model("models/new_model.h5")
 
 CAP_PROP_POS_MSEC = 0
 
-def frame_iterator(filename, every_ms=1000, max_num_frames=50):
+def frame_iterator(filename, every_ms=1000, max_num_frames=30):
     video_capture = cv2.VideoCapture()
     if not video_capture.open(filename):
         return
@@ -53,7 +53,7 @@ def quantize(features, min_quantized_value=-2.0, max_quantized_value=2.0):
   return features
 
 
-def predict(video_file, num_frames=45):
+def predict(video_file, num_frames=30):
     rgb_features = []
     sum_rgb_features = None
 
@@ -96,7 +96,7 @@ st.write("Upload a video file to get predictions")
 
 # choose number of frames to consider (too many frames might crash the app)
 
-num_frames = st.slider("Number of frames to consider", 5, 300, 30)
+num_frames = 30 #st.slider("Number of frames to consider", 5, 300, 30)
 
 
 uploaded_file = st.file_uploader("Choose a video...", type=["mp4"])
@@ -110,13 +110,13 @@ if video_title:
     st.video(f"data/Test_Video/{video_title}")
     video_file = f"data/Test_Video/{video_title}"
     with st.spinner("Predicting..."):
-      predictions = predict(video_file, num_frames)
+      predictions = predict(video_file, num_frames=num_frames)
 
 if uploaded_file is not None:
     st.video(uploaded_file)
     video_file = uploaded_file
     with st.spinner("Predicting..."):
-        predictions = predict(video_file, num_frames)
+        predictions = predict(video_file, num_frames=num_frames)
 
 
 
